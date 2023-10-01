@@ -1,4 +1,21 @@
-#include<stdbool.h>
+/* Questions on Linked List
+1. Check loop in a linked list
+2. Find the middle of a linked list
+3. Find the nth node from the end
+4. Merge 2 linked list
+5. Print the linked list in reverse order
+6. Check if the linked list is pallindrome
+7. Sort a linked list
+8. Implement a queue using linked list
+9. Implement a stack using a linked list
+10. Reverse a Linked list
+11. Intersection of 2 linked list
+
+Problems
+Power Set
+*/
+
+#include<stdbool.h> // for bool
 #include<stdio.h> // for NULL can also use stddef.h
 #include<string.h>
 #include<stdlib.h> // for malloc
@@ -11,62 +28,86 @@ typedef struct Node {
   int num;
   char name[10];
   Node* next;
-} Node;
+} Node;  // Not doing this will give a warning
 
 bool check_loop(Node* head) {
-  if ((head == NULL) || (head->next == NULL)) {
-    return false;
-  }
-  Node* fast_ptr = head->next;
+  Node* fast_ptr = head;
   Node* slow_ptr = head;
 
-  while (fast_ptr != NULL && fast_ptr->next != NULL) {
+  while (slow_ptr && fast_ptr && fast_ptr->next) {
+
+    slow_ptr = slow_ptr->next;
+    fast_ptr = fast_ptr->next->next;
 
     if (slow_ptr == fast_ptr) {
+      printf("\nLoop found at %p num=%d", fast_ptr, fast_ptr->num);
       return true;
     }
-    printf("\nFast Ptr %d %s %p", fast_ptr->num, fast_ptr->name, fast_ptr->next);
-    printf("\nSlow Ptr %d %s %p", slow_ptr->num, slow_ptr->name, slow_ptr->next);
-    slow_ptr = slow_ptr->next;
-    fast_ptr = (fast_ptr->next)->next;
+    printf("\nFast Ptr %d %p", fast_ptr->num, fast_ptr);
+    printf("\nSlow Ptr %d %p", slow_ptr->num, slow_ptr);
   }
+  printf("\nLoop not found - reached end of LL slow_ptr %d fast_ptr %d", slow_ptr->num, fast_ptr->num);
   return false;
 }
 
-void check_loop_main() {
+void reverse(Node **head)
+{
+  Node *curr = *head;
+  Node* prev = NULL;
+  Node* next = NULL;
+  while (curr)
+  {
+    next = curr->next;
+    curr->next = prev;
+    prev = curr;
+    curr = next;
+  }
+  *head = prev;
+}
 
-  bool flag = false;
-  Node* node1 = (Node*)malloc(sizeof(Node));
-  Node* node2 = (Node*)malloc(sizeof(Node));
-  Node* node3 = (Node*)malloc(sizeof(Node));
-  Node* node4 = (Node*)malloc(sizeof(Node));
-  Node* node5 = (Node*)malloc(sizeof(Node));
+void push (Node** head, int num)
+{
+  Node* item = (Node *)malloc(sizeof(Node));
+  // check item NULL error
 
-  node1->num = 1;
-  node2->num = 2;
-  node3->num = 3;
-  node4->num = 4;
-  node5->num = 5;
+  item->num = num;
+  item->next = *head;
 
-  strcpy(node1->name, "Ankit");
-  strcpy(node2->name, "Abhilasha");
-  strcpy(node3->name, "Mylo");
-  strcpy(node4->name, "Krunal");
-  strcpy(node5->name, "Aadya");
+  *head = item;
+}
 
-  node1->next = node2;
-  node2->next = node3;
-  node3->next = node4;
-  node4->next = node5;
-  node5->next = node2;
-
-  flag = check_loop(node1);
-  printf("Result check loop = %d node1:%p %d %s %p", flag, node1, node1->num, node1->name, node1->next);
-
+void print (Node* head)
+{
+  int count = 0;
+  while(head)
+  {
+    printf("\nNode#%d %d", count++, head->num); 
+    head = head->next;
+  }
 }
 
 int main() {
-  check_loop_main();
+  Node *head = NULL;
+  //check_loop_main(); deprecated
+  /* IMP - we pass &head because we want the function to update the new head - handler function will need double pointer */
+  push(&head, 5);
+  push(&head, 4);
+  push(&head, 3);
+  push(&head, 2);
+  push(&head, 1);
+
+  print(head);
+
+/*
+  printf("\nChecking loop in LL returns %d", check_loop(head));
+  // Add a loop to test check_loop function
+  printf("\nAdding a loop");
+  head->next->next->next->next->next = head;
+
+  printf("\nChecking loop in LL returns %d", check_loop(head));
+*/
+  reverse(&head);
+  print(head);
   return 0;
 }  
   
