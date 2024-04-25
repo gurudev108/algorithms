@@ -1,0 +1,1 @@
+Nothing fancy, just some easy problems to understand the Data Structures and Algorithm concepts first and then build on top of it to solve some medium problems. Similar to Leetcode basic 75 questions.I am into embedded so I have included some embedded stuff as well.
