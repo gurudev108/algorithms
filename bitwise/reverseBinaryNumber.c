@@ -1,4 +1,4 @@
-/* Reverse a binary number */
+p/* Reverse a binary number */
 
 #include <stdio.h>
 

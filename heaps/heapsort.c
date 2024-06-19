@@ -7,7 +7,7 @@ By default min heap where getting minimum is O(1) where root node is the smalles
 Useful in arranging in descending order by keeping A[0] at last index. 
 
 For index starting at 0,
-  Parent(i) return floor(i-1/2)
+  Parent(i) return floor(i-1)/2
   Left(i) return 2i+1
   Right(i) return 2i+2
 All of the above can be done through Bitwise operations
@@ -53,6 +53,7 @@ void swap(int* a, int* b) {
     *b = temp;
 }
 
+#if 0
 // Function to perform heapify-up operation after inserting an element.
 void heapifyUp(int arr[], int index) {
     while (index > 0) {
@@ -65,6 +66,7 @@ void heapifyUp(int arr[], int index) {
         }
     }
 }
+#endif
 
 /* N = size of the heap */
 void heapify_minHeap(int *A, int N, int i)
@@ -93,6 +95,7 @@ void heapify_minHeap(int *A, int N, int i)
   }
 }
 
+#if 0
 /* N = size of the heap */
 void heapify_maxHeap(int *A, int N, int i)
 {
@@ -121,6 +124,8 @@ void heapify_maxHeap(int *A, int N, int i)
   }
 }
 
+#endif
+
 void buildMinHeap(int *A, int N, int len)
 {
   for (int i=PARENT(len-1); i>=0; i--)
@@ -129,6 +134,7 @@ void buildMinHeap(int *A, int N, int len)
   }
 }
 
+#if 0
 void buildMaxHeap(int *A, int N, int len)
 {
   for (int i=PARENT(len-1); i>=0; i--)
@@ -146,6 +152,8 @@ void insert_minHeap (int *A, int *len, int priority)
 
 }
 
+
+
 void delete_min(int *A, int *size)
 {
   /* Get the last element */
@@ -161,6 +169,7 @@ void delete_min(int *A, int *size)
   heapify_minHeap(A, *size, 0);
 
 }
+#endif
 
 void heapSort_minHeap(int *A, int len)
 {
@@ -184,6 +193,7 @@ void heapSort_minHeap(int *A, int len)
 
 }
 
+#if 0
 void heapSort_maxHeap(int *A, int len)
 {
   int largest = 0;
@@ -206,6 +216,7 @@ void heapSort_maxHeap(int *A, int len)
   }
 
 }
+#endif
 
 void print_array(int *A, int len, char* str)
 {
@@ -223,7 +234,7 @@ int main()
   heapSort_minHeap(in_arr, len);
   print_array(in_arr, len, "After heapSort_minHeap");
 
-/*
+#if 0
   printf("\nResetting array");
   int in_arr1[] = {5,7,8,4,9,3,2,0,1,6};
   print_array(in_arr1, len, "Original array");
@@ -239,7 +250,7 @@ int main()
   
   insert_minHeap(in_arr1, &len, 0);
   print_array(in_arr1, len, "after inserting 100");
-*/
+#endif
 
   return 0;
 }
