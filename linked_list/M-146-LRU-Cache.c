@@ -1,3 +1,14 @@
+/* 
+
+LRU Cache - Doubly linked list with array based cache lookup
+
+Output -
+1
+-1
+-1
+3
+4
+*/
 #include <stdio.h>
 #include <stdlib.h>
 
