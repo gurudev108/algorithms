@@ -1,6 +1,10 @@
 /* 
 151. Reverse Words in a string
 Medium
+
+Output:
+Original String: "   the sky is   blue  "
+Reversed String: " blue is sky the "
 */
 
 #include <stdio.h>
@@ -33,7 +37,7 @@ char* reverseWords(char* s) {
             start = end + 1;
         }
     }
-    // Reverse the last word
+    // Reverse the last word - @TODO Check if we really need it
     reverseSubstring(s, start, length - 1);
 
     // Step 3: Remove extra spaces
