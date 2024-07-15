@@ -1,3 +1,25 @@
+/*
+
+146. LRU Cache using doubly linked list and hashmap implemented as arrays.
+
+1. Think about structures for a node and LRU cache and hashmap.
+2. Create LRU Cache
+3. Put some stuff in it
+   3.1 If Key already exists, update value and move to front
+   3.2 If key doesn't exist, add and move node to front
+   3.3 If cache exceeds capacity, evict LRU
+4. Get some stuff from it,
+   4.1 if key exists, return value and move node to the front
+   4.2 if key doesn't exist return -1
+
+Verified output:
+1
+-1
+-1
+3
+4
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -154,7 +176,13 @@ int main() {
     lRUCachePut(lruCache, 1, 1);
     lRUCachePut(lruCache, 2, 2);
     printf("%d\n", lRUCacheGet(lruCache, 1)); // Output: 1
-    lRUCachePut(lruCache, 3, 3);
+    lRUCachePut(lruCache, 3, 3); // Removes key 2 (LRU)
     printf("%d\n", lRUCacheGet(lruCache, 2)); // Output: -1 (not found)
-    lRUCachePut(lruCache,
+    lRUCachePut(lruCache, 4, 4); // Removes key 1 (LRU)
+    printf("%d\n", lRUCacheGet(lruCache, 1));  // Output: -1
+    printf("%d\n", lRUCacheGet(lruCache, 3));  // Output: 3
+    printf("%d\n", lRUCacheGet(lruCache, 4));  // Output: 4
+    lRUCacheFree(lruCache);
+    return 0;
+}
 
