@@ -1,3 +1,19 @@
+/* 
+Leetcode E 20 Valid Parenthesis
+
+Approach:
+Use stack of size = length of string.
+For every open bracket, push it on stack
+For every close bracket, if stack is empty throw error, otherwise if top element is not matching the closed bracket throw error.
+
+Output:
+Test String 1: Valid
+Test String 2: Valid
+Test String 3: Invalid
+Test String 4: Invalid
+Test String 5: Valid
+
+*/
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
