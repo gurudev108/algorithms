@@ -10,6 +10,8 @@ Greedy - The greedy approach focuses on making the optimal choice at each step t
 
 Output:
 True
+
+Verified on Leetcode 88-16
 */
 #include <stdio.h>
 #include <stdbool.h>

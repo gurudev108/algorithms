@@ -1,11 +1,13 @@
 /*
 Leetcode M 55. The Jump Game
 
-Approach:
+Approach: Trying DL just to understand it in comparison to Greedy
 A dynamic programming (DP) approach would involve breaking down the problem into smaller subproblems and solving each one, typically storing the results of these subproblems to avoid redundant computations. For the "Jump Game" problem, a DP approach might involve creating an array dp where dp[i] represents whether the end can be reached starting from index i. However, this would typically involve checking all possible jumps from each position and is often more computationally expensive than the greedy approach.
 
 Output:
 True
+
+Verified SLOW on Leetcode 7-9
 */
 #include <stdio.h>
 #include <stdbool.h>
