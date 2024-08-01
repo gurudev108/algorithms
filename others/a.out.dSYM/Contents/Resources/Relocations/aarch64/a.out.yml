@@ -1,0 +1,12 @@
+---
+triple:          'arm64-apple-darwin'
+binary-path:     a.out
+relocations:
+  - { offsetInCU: 0x26, offset: 0x26, size: 0x8, addend: 0x0, symName: _createNode, symObjAddr: 0x0, symBinAddr: 0x100003C1C, symSize: 0x48 }
+  - { offsetInCU: 0xC6, offset: 0xC6, size: 0x8, addend: 0x0, symName: _createNode, symObjAddr: 0x0, symBinAddr: 0x100003C1C, symSize: 0x48 }
+  - { offsetInCU: 0xFC, offset: 0xFC, size: 0x8, addend: 0x0, symName: _createQueue, symObjAddr: 0x48, symBinAddr: 0x100003C64, symSize: 0x60 }
+  - { offsetInCU: 0x124, offset: 0x124, size: 0x8, addend: 0x0, symName: _enqueue, symObjAddr: 0xA8, symBinAddr: 0x100003CC4, symSize: 0x88 }
+  - { offsetInCU: 0x164, offset: 0x164, size: 0x8, addend: 0x0, symName: _dequeue, symObjAddr: 0x130, symBinAddr: 0x100003D4C, symSize: 0x7C }
+  - { offsetInCU: 0x19A, offset: 0x19A, size: 0x8, addend: 0x0, symName: _bfs, symObjAddr: 0x1AC, symBinAddr: 0x100003DC8, symSize: 0xF8 }
+  - { offsetInCU: 0x1E8, offset: 0x1E8, size: 0x8, addend: 0x0, symName: _main, symObjAddr: 0x2A4, symBinAddr: 0x100003EC0, symSize: 0xAC }
+...
