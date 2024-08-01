@@ -1,6 +1,12 @@
 /* 
 Leetcode 285 Inorder Successor in BST
 
+Approach 1: Using parent pointer
+
+Approach 2: Search from the root
+Parent pointer is NOT needed in this algorithm. The Algorithm is divided into
+two cases on the basis of right subtree of the input node being empty or not.
+
 Verified Output:
 BST created with data=10 at address=0x600000d391e0
 Item:2 added at 0x600000d39200
@@ -53,6 +59,11 @@ Node* createBST(int data) {
   return head;
 }
 
+/* Give a binary search tree and a number, inserts a new node with    
+   the given number in the correct place in the tree. Returns the new
+   root pointer which the caller should then use (the standard trick to 
+   avoid using reference parameters). */
+
 Node* insert(Node* head, int data) {
 
   if (head == NULL) return NULL;
@@ -102,7 +113,7 @@ Node* minimum(Node* head) {
 /*
 TREE-MAXIMUM(x)
 */
-Node* maximum(Node* head) {
+Node* maximum(Node* he:ad) {
   if (head == NULL) return NULL;
 
   while(head->right) {
@@ -121,9 +132,11 @@ TREE-SUCCESSOR(x) - node with the smallest key greater than key[x]
 Node* successor(Node* head, Node* item) {
   Node* result = NULL;
   if (head == NULL) return NULL;
-  // Case 1 - Right child is not NULL, then successor is the leftmost node in the right subtree
+  /* Case 1 - Right child is not NULL, then successor is the leftmost node in 
+  the right subtree */
   if (item->right) return minimum(item->right);
-  // Case 2 - No right child, find the lowest ancestor of item whose left child is also an ancestor of item
+  /* Case 2 - No right child, find the lowest ancestor of item whose left child
+  is also an ancestor of item */
   while (head) {
     if (head->data == item->data) {
       printf("\nSuccessor found");

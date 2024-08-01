@@ -1,4 +1,5 @@
 /*
+DFS
 Leetcode 94. Binary Tree Inorder Traversal
 
 Verified output:

@@ -1,5 +1,11 @@
 /*
+
 This program defines a binary tree structure using a TreeNode structure. It creates the binary tree as described in the example and then prints the nodes of the tree level-wise using breadth-first search (BFS) traversal. The printLevelOrder function implements BFS using a queue data structure to process nodes level by level. Finally, the main function creates the binary tree and calls printLevelOrder to print the nodes level-wise.
+
+Just 1 struct TreeNode and queue[1000]
+
+Verified Output:
+Nodes in the binary tree level-wise: 1 2 3 4 5 
 */
 
 #include <stdio.h>

@@ -1,5 +1,6 @@
 /* Heap Sort 
 Combines better attributes of Merge Sort (O(logn)) and Insertion sort (in place)
+
 (Binary) Heap  data structure is an ARRAY viewed as a Complete Binary tree and has 2 properties 
 1. Structural property - Similar to complete binary tree and last level Left Full
 2. Heap property - Priority of a node depending on min or max heap will be less or more. 
@@ -42,7 +43,7 @@ Interfaces
 
 #define LEFT(i) (2*i+1)
 #define RIGHT(i) (2*i+2)
-#define PARENT(i) (i-1/2)
+#define PARENT(i) ((i-1)/2)
 
 void print_array(int *A, int len, char* str);
 

@@ -1,3 +1,28 @@
+/*
+
+BFS - Level Order Traversal
+
+Approach - Uses a queue to traverse the binary tree in level-order.
+Queue implemented as Linked List here, it could also be implemented as an array 
+
+3struct TreeNode QueueNode Queue and malloc for queue
+Since its printing so no need to store the result. 
+
+Components
+1. TreeNode Structure: Represents each node in the binary tree.
+2. QueueNode Structure: Represents each node in the queue used for BFS.
+3. Queue Operations:
+   3.1 enqueue: Adds a tree node to the queue.
+   3.2 dequeue: Removes a tree node from the queue and returns it.
+4. BFS Function:Uses a queue to traverse the binary tree in level-order.
+   4.1 Enqueue root
+   4.2 While (there are elements in queue), dequeue and print a node and add its child into queue.
+
+Verified Output:
+Level Order Traversal: 1 2 3 4 5 
+
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -45,12 +70,14 @@ struct Queue* createQueue() {
 // Function to enqueue a tree node to the queue
 void enqueue(struct Queue* q, struct TreeNode* data) {
     struct QueueNode* temp = newQueueNode(data);
+    // if empty, assign both front and rear to new node
     if (q->rear == NULL) {
         q->front = q->rear = temp;
-        return;
-    }
+    } else {
+    // if not empty, add the new node at the end.
     q->rear->next = temp;
     q->rear = temp;
+    }
 }
 
 // Function to dequeue a tree node from the queue

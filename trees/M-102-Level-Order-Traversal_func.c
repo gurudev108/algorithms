@@ -1,6 +1,12 @@
-/* Verified and submitted on Leetcode */
+/* Verified and submitted on Leetcode 
 
+1 struct TreeNode and queue[1000], 
+result array is malloced which is passed to Leetcode return
+because we are storing it and not just printing it.
+
+*/
 /**
+ *
  * Definition for a binary tree node.
  * struct TreeNode {
  *     int val;
