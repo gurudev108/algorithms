@@ -1,3 +1,8 @@
+/*
+Output: 
+Big-endian: 0x12345678
+Little-endian: 0x78563412
+*/
 #include <stdio.h>
 
 // Function to convert a big-endian integer to a little-endian integer

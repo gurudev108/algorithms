@@ -29,6 +29,9 @@ will go to different lists.
 Now iterate both lists once more and do XOR on each element. The result will be the duplicate element present in one 
 list and the missing number present in the other list (since elements appearing twice will cancel each other).
 
+Output:
+Duplicate number: 2
+Missing number: 5
 */
 
 
@@ -43,7 +46,7 @@ void findDuplicateAndMissing(int arr[], int n) {
         xorResult ^= i;
     }
 
-    // Get the rightmost set bit of xorResult
+    // @TODO-IMP Get the rightmost set bit of xorResult
     int set_bit = xorResult & ~(xorResult - 1); // or xorResult & (-xorResult)
 
     int x = 0, y = 0; // x will hold the duplicate, y will hold the missing number
@@ -63,8 +66,8 @@ void findDuplicateAndMissing(int arr[], int n) {
         }
     }
 
-    printf("Duplicate number: %d\n", x);
-    printf("Missing number: %d\n", y);
+    printf("Duplicate number: %d\n", y);
+    printf("Missing number: %d\n", x);
 }
 
 int main() {

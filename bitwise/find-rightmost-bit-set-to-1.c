@@ -1,3 +1,9 @@
+/* 
+
+Input: 18 0010010
+Output:
+The rightmost bit set to 1 in number 18 n&-n=2 is at position: 1
+*/
 #include <stdio.h>
 #include <stdint.h>
 

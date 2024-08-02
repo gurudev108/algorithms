@@ -1,4 +1,13 @@
-/* This file contains my experiments with bitwise operations in embedded C */
+/* This file contains my experiments with bitwise operations in embedded C 
+
+Output:
+Little Endian
+===Bitwise===
+countBitsSet(11) = 3
+get_sign(11) = 0, get_sign(-11) = 1
+trailing_zeros(64) = 6
+Rotate bits of abcd1234 by 16 = 1234abcd
+*/
 
 #include <stdio.h>  /* printf */
 #include <stdint.h> /* uint8_t */
@@ -13,6 +22,7 @@ CHAR_BIT could be defined as a MACRO with value 8, its also defined in limits.h.
 ^ is used for XOR, and not exponentiation
  FLip all the bits - XOR with 0xFFFFFFFF
 
+@TODO-IMP
 x & (-x) = Get the rightmost 1-bit and set all the other bits to 0
  x = 7        0 0 0 0 0 1 1 1 
  -7 = ~x+1    1 1 1 1 1 0 0 1 // rightmost 1-bit is common between 7 and -7
@@ -67,7 +77,11 @@ uint8_t countBitsSet_1(uint32_t num)
 #include <stdio.h>
 
 /***** IMP. ******/ 
-// Function to set bits from position x to y in num
+/*
+Function to set bits from position x to y in num
+0001110
+x=2 y=4
+*/
 unsigned int setBits(unsigned int num, int x, int y) {
     // Create a mask with all 1s in the range [x, y]
     unsigned int mask = ((1 << (y - x + 1)) - 1) << x;
@@ -76,6 +90,7 @@ unsigned int setBits(unsigned int num, int x, int y) {
     return (num | mask);
 }
 
+/* Highest power of 2 less than or equal to the number */
 uint32_t highestPowerof2(uint32_t n)
 {
     int res = 0;
@@ -117,7 +132,7 @@ uint8_t get_sign(uint32_t num)
 
 }
 
-// Find the number of trailing zeros in an integer
+// Find the number of trailing zeros in an integer 10000 4 trailing zeros
 uint32_t trailing_zeros(uint32_t num) {
   int count = 0;
   while ((num & 1) == 0) {
@@ -156,6 +171,21 @@ void printPowerSet(char *set, int set_size)
 }
 #endif
 
+/*
+Endianness refers to the order in which bytes are arranged in memory. 
+In little-endian systems, the least significant byte (LSB) is stored at the lowest memory address, while 
+in big-endian systems, the most significant byte (MSB) is stored at the lowest memory address.
+
+Most modern processors are little-endian
+Modern Mac is little endian since Intel but earlier they were Big endian
+ARM is little endian but also operate Mixed Endian
+
+Big Endian - Some embedded devices like PS 3, IBM Mainframe
+
+Network Protocols:
+Many network protocols (e.g., IP, TCP, and UDP) use big-endian, also known as network byte order. 
+This makes big-endian naturally suited for network data handling and communication.
+*/
 void check_endianess (void)
 {
   unsigned int value = 0x12345678;
@@ -175,7 +205,8 @@ void check_endianess1 (void)
 {
   int num = 1;
   if (*(char* )&num == 1)
-    /* Little Endian saves 01 as 10 - saved in memory as 0000001 0000000 */
+    /* Little Endian saves 01 as 10 - saved in memory as 0000001 000000
+    LSB is stored first at lower address */
     printf("Little Endian");
   else
     /* Big Endian saves 01 as 01 - saved in memory as 0000000 00000001 */ 
@@ -211,7 +242,7 @@ void bitwise_main(void)
 int main()
 {
   /* Check if the machine is Big Endian or Little Endian */
-  check_endianess1();
+  check_endianess();
   bitwise_main();
   return 0;
 }
