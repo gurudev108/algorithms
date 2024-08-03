@@ -1,0 +1,121 @@
+/*
+
+Leetcode E 938 Range sum of BST
+Given the root node of a binary search tree and two integers low and high, return the sum of values of all nodes with a value in the inclusive range [low, high].
+
+Approach:
+1. Recursive
+2. Iterative using stack
+
+*/
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
+
+// Definition for a binary tree node.
+struct TreeNode {
+    int val;
+    struct TreeNode *left;
+    struct TreeNode *right;
+};
+
+// Function to create a new TreeNode.
+struct TreeNode* createTreeNode(int val) {
+    struct TreeNode* newNode = (struct TreeNode*)malloc(sizeof(struct TreeNode));
+    newNode->val = val;
+    newNode->left = newNode->right = NULL;
+    return newNode;
+}
+
+// Stack implementation
+struct Stack {
+    struct TreeNode** data;
+    int top;
+    int capacity;
+};
+
+struct Stack* createStack(int capacity) {
+    struct Stack* stack = (struct Stack*)malloc(sizeof(struct Stack));
+    stack->capacity = capacity;
+    stack->top = -1;
+    stack->data = (struct TreeNode**)malloc(stack->capacity * sizeof(struct TreeNode*));
+    return stack;
+}
+
+bool isStackEmpty(struct Stack* stack) {
+    return stack->top == -1;
+}
+
+void push(struct Stack* stack, struct TreeNode* node) {
+    stack->data[++stack->top] = node;
+}
+
+struct TreeNode* pop(struct Stack* stack) {
+    return stack->data[stack->top--];
+}
+
+int rangeSumBSTIterative(struct TreeNode* root, int low, int high) {
+    if (root == NULL) return 0;
+
+    int sum = 0;
+    struct Stack* stack = createStack(1000);
+    push(stack, root);
+
+    while (!isStackEmpty(stack)) {
+        struct TreeNode* node = pop(stack);
+
+        if (node->val >= low && node->val <= high) {
+            sum += node->val;
+        }
+
+        if (node->left && node->val > low) {
+            push(stack, node->left);
+        }
+
+        if (node->right && node->val < high) {
+            push(stack, node->right);
+        }
+    }
+
+    free(stack->data);
+    free(stack);
+    return sum;
+}
+
+
+int rangeSumBSTRecursive(struct TreeNode* root, int low, int high) {
+    if (root == NULL) return 0;
+
+    if (root->val < low) {
+        return rangeSumBSTRecursive(root->right, low, high);
+    } else if (root->val > high) {
+        return rangeSumBSTRecursive(root->left, low, high);
+    } else {
+        return root->val + rangeSumBSTRecursive(root->left, low, high) + rangeSumBSTRecursive(root->right, low, high);
+    }
+}
+
+int main() {
+    // Create a sample BST:
+    //        10
+    //       /  \
+    //      5   15
+    //     / \    \
+    //    3   7   18
+    struct TreeNode *root = createTreeNode(10);
+    root->left = createTreeNode(5);
+    root->right = createTreeNode(15);
+    root->left->left = createTreeNode(3);
+    root->left->right = createTreeNode(7);
+    root->right->right = createTreeNode(18);
+
+    int low = 7, high = 15;
+    
+    // Compute and print the range sum.
+    int result_recursive = rangeSumBSTRecursive(root, low, high);
+    int result_iterative = rangeSumBSTIterative(root, low, high);
+    printf("Range Sum of BST for range [%d, %d]: recursive %d iterative %d \n", low, high, result_recursive, result_iterative);
+    
+    return 0;
+}
+
