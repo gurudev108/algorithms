@@ -1,5 +1,5 @@
 /* If we have to rotate 3 bits from LSB to MSB, we can 
-right shift by 3 and | it with left shift by 5=5=5=5=5=5=5=5=5=5=5=5=5=5=5=5=5=5=5=5=5=5=5=5=5=5=5=5=5=5=5=5=5=5=5=5=5=5=5=5=5=5=5=5=5=5=5=5=5=5=5=5=5=5=(8-3) */ 
+right shift by 3 and | it with left shift by 5(8-3) */ 
 #include <stdio.h>
 #include <stdint.h>
 

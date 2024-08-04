@@ -11,6 +11,9 @@ Example:
    5 = (101) = {a, c}
    6 = (110) = {a, b}
    7 = (111) = {a, b, c}
+
+Output:
+
 */
 
 #include <stdio.h>

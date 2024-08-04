@@ -9,6 +9,34 @@ The printFreeBlocks function is provided for testing purposes to print the state
 Note that this is a very basic and naive implementation for educational purposes. In a real-world scenario, a memory allocator needs to handle 
 concurrency, fragmentation, and other considerations, which are beyond the scope of this simple example. Additionally, this implementation assumes 
 a single block of memory, and it does not handle memory leaks or other advanced features.
+
+Output:
+Free Blocks (Before Allocation):
+
+0. Free Block: Size = 1008
+myMalloc called to allocate size 20
+myMalloc adjusted size 24 after memory alignment
+Free Blocks (After 5 int Allocation):
+
+0. Free Block: Size = 968
+myMalloc called to allocate size 24
+myMalloc adjusted size 24 after memory alignment
+Free Blocks (After 3 double Allocation):
+
+0. Free Block: Size = 928
+Free Blocks (After Freeing Memory):
+
+0. Free Block: Size = 40
+1. Free Block: Size = 928
+myMalloc called to allocate size 8
+myMalloc adjusted size 8 after memory alignment
+0. Free Block: Size = 16
+1. Free Block: Size = 928
+myMalloc called to allocate size 32
+myMalloc adjusted size 32 after memory alignment
+malloc While loop index 0
+0. Free Block: Size = 16
+1. Free Block: Size = 880%    
 */
 
 #include <stdio.h>

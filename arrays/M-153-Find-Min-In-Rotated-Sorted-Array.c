@@ -1,3 +1,15 @@
+/*
+Given the sorted rotated array nums of unique elements, return the minimum element of this array.
+You must write an algorithm that runs in O(log n) time.
+
+Example 1:
+Input: nums = [3,4,5,1,2]
+Output: 1
+Explanation: The original array was [1,2,3,4,5] rotated 3 times.
+
+Approach: Binary Search
+
+*/
 int findMin(int* nums, int numsSize){
     int left = 0;
     int right = numsSize -1;

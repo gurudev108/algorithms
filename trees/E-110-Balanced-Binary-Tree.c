@@ -3,6 +3,7 @@ https://leetcode.com/problems/balanced-binary-tree/description/
 110. Balanced Binary Tree
 Easy
 Given a binary tree, determine if its height balanced
+A height-balanced binary tree is a binary tree in which the depth of the two subtrees of every node never differs by more than one.
 */
 
 /**

@@ -4,16 +4,13 @@ https://leetcode.com/problems/rotate-array/description/
 Given an integer array nums, rotate the array to the right by k steps, where k is non-negative.
 
 Approach 2: Using Extra Array
-
-Algorithm
-
 We use an extra array in which we place every element of the array at its correct
 position i.e. the number at index iii in the original array is placed at the
 index (i+k)% length of array(i + k) \% \text{ length of array}(i+k)% length of array.
 Then, we copy the new array to the original one.
 
 
-Approach 4: Using Reverse
+Approach 4: Using Reverse (RECOMMENDED)
 This approach is based on the fact that when we rotate the array k times, kk%nk elements from the back end of the array come to the front and the rest of the elements from the front shift backwards.
 
 In this approach, we firstly reverse all the elements of the array. Then, reversing the first k elements followed by reversing the rest n−kn-kn−k elements gives us the required result.

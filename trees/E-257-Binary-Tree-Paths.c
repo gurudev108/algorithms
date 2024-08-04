@@ -1,3 +1,9 @@
+/*
+Given the root of a binary tree, return all root-to-leaf paths in any order.
+
+A leaf is a node with no children.
+*/
+
 /**
  * Definition for a binary tree node.
  * struct TreeNode {
@@ -6,9 +12,7 @@
  *     struct TreeNode *right;
  * };
  */
-/**
- * Note: The returned array must be malloced, assume caller calls free().
- */
+
 void binaryTreePathsHelper(struct TreeNode* root, char* currentPath, char** result, int* resultSize) {
     if (!root) {
         return;

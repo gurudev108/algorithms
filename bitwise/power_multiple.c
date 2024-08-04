@@ -1,5 +1,13 @@
 #include <stdio.h>
 
+/* Function to check if a number is a power of 2. A number that is a power of 2 has exactly one bit set in its binary representation.
+A number n is a power of 2 if n & (n - 1) == 0 and n is greater than zero. This is because, for numbers that are powers of 2, their binary representation has exactly one bit set, and subtracting 1 from them flips all bits after the set bit (including the set bit).
+*/
+int isPowerOfTwo(unsigned int n) {
+    // Check if n is greater than 0 and n & (n - 1) is 0
+    return (n != 0) && ((n & (n - 1)) == 0);
+}
+
 /*
 A number n is a power of 4 if the following conditions are met. 
 a) There is only one bit set in the binary representation of n (or n is a power of 2) 

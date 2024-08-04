@@ -19,13 +19,14 @@ int swap(int n, int p, int q)
     // if bits are different at position `p` and `q`
     if (((n & (1 << p)) >> p) ^ ((n & (1 << q)) >> q))
     {
+        /* swap bits at pos p and q */
         n ^= (1 << p);
         n ^= (1 << q);
     }
     return n;
 }
 
-// Approach 2
+// Approach 2 (RECOMMENDED - lesser shifts)
 // Function to swap bits at position `p` and `q` in integer `n`
 int swap1(int n, int p, int q)
 {
