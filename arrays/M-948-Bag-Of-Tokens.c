@@ -12,6 +12,16 @@ Verified on Leetcode 45-6
 
 Approach - Sort and Greedy, use 2 pointers
 
+Example 1:
+Input: tokens = [100], power = 50
+Output: 0
+Explanation: Since your score is 0 initially, you cannot play the token face-down. You also cannot play it face-up since your power (50) is less than tokens[0] (100).
+
+Example 2:
+Input: tokens = [200,100], power = 150
+Output: 1
+Explanation: Play token1 (100) face-up, reducing your power to 50 and increasing your score to 1.
+There is no need to play token0, since you cannot play it face-up to add to your score. The maximum score achievable is 1.
 Output:
 Maximum Score: 2
 */

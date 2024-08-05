@@ -15,6 +15,13 @@ Calculate the minimum idle slots required by arranging the most frequent tasks a
 Fill the Idle Slots:
 Use the remaining tasks to fill in the idle slots. If the idle slots are more than the number of remaining tasks, they stay as idle slots; otherwise, they get filled.
 
+Example 1:
+
+Input: tasks = ["A","A","A","B","B","B"], n = 2
+Output: 8
+Explanation: A possible sequence is: A -> B -> idle -> A -> B -> idle -> A -> B.
+After completing task A, you must wait two cycles before doing A again. The same applies to task B. In the 3rd interval, neither A nor B can be done, so you idle. By the 4th cycle, you can do A again as 2 intervals have passed.
+
 */
 
 #include <stdio.h>

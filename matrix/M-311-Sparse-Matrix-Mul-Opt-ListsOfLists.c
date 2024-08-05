@@ -103,10 +103,12 @@ Explanation -
 Data Structure:
 We use a struct Element to represent non-zero elements along with their column indices.
 mat1 and mat2 are arrays of lists (arrays of Element*) where each list contains the non-zero elements for that row.
+
 Matrix Multiplication:
 For each row in mat1, we iterate over its non-zero elements.
 For each non-zero element (value, column) in mat1, we find the corresponding row in mat2 (since mat2's rows correspond to columns in mat1 due to the matrix multiplication).
 We then iterate over the non-zero elements in the corresponding row of mat2 to accumulate the product in the resulting matrix.
+
 Efficiency:
 This method significantly reduces the number of computations by only considering non-zero elements, thus making it efficient for large sparse matrices.
 Memory Management:

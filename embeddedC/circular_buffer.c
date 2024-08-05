@@ -1,3 +1,23 @@
+/*
+
+Output:
+Buffer empty
+ Push 1 head = 0 tail = 1 is_full = 0 data@head = 1 data@tail = 0
+ Push 2 head = 0 tail = 2 is_full = 0 data@head = 1 data@tail = 0
+ Push 3 head = 0 tail = 3 is_full = 0 data@head = 1 data@tail = 0
+ Push 4 head = 0 tail = 4 is_full = 0 data@head = 1 data@tail = 0
+ Push 5 head = 0 tail = 0 is_full = 1 data@head = 1 data@tail = 1
+ Pop head = 1 tail = 0 is_full = 0 data@head = 2 data@tail = 1
+ Push 6 head = 1 tail = 1 is_full = 1 data@head = 2 data@tail = 2
+Buffer full
+Buffer full
+ Pop head = 2 tail = 1 is_full = 0 data@head = 3 data@tail = 2
+ Pop head = 3 tail = 1 is_full = 0 data@head = 4 data@tail = 2
+ Pop head = 4 tail = 1 is_full = 0 data@head = 5 data@tail = 2
+ Pop head = 0 tail = 1 is_full = 0 data@head = 6 data@tail = 2
+ Pop head = 1 tail = 1 is_full = 0 data@head = 2 data@tail = 2
+Buffer empty
+*/
 #include <stdio.h>
 
 #define BUFFER_SIZE 5
