@@ -1,5 +1,49 @@
-/* sem_init is giving error -1 on Mac terminal, works on coderpad.io 
-checked online and recommended to try sem_open and sem_close 
+/* 
+
+Produce consumer problem using semaphores
+
+/* Produce Consumer with POSIX semaphores 
+
+int sem_init(sem_t *semaphore, int pshared, int init);
+int sem_destroy(sem_t *semaphore);
+int sem_wait(sem_t *semaphore);      // P operation
+int sem_trywait(sem_t *semaphore);  // conditional P operation
+int sem_post(sem_t *semaphore);     // V operation
+
+This semaphor is useful only for 1 producer and 1 consumer
+For more than one use Condition Variable where you could signal to multiple threads.
+
+USE 2 SEMAPHORES - empty and occupied
+Use 2 locations - nextin, nextout
+1 Buffer
+
+Output:
+ == SEMAPHORE ==
+
+Semaphore empty returns:-1 value:-1 
+Semaphore occupied returns:-1 value:-1
+[P]Producer WAITING semwait empty:0
+[P]INSIDE PRODUCER:0
+Waiting for producer thread to be over
+[P]Produced item:65
+[P]Producer SIGNALED:65 occupied:0
+[P]Producer WAITING semwait empty:0
+[P]INSIDE PRODUCER:0
+[P]Produced item:66
+[P]Producer SIGNALED:66 occupied:0
+[P]Producer WAITING semwait empty:0
+[P]INSIDE PRODUCER:0
+[P]Produced item:67
+[P]Producer SIGNALED:67 occupied:0
+[P]Producer WAITING semwait empty:0
+[P]INSIDE PRODUCER:0
+[P]Produced item:68
+[P]Producer SIGNALED:68 occupied:0
+[C]Consumer WAITING occupied:0
+[C]INSIDE CONSUMER:0
+[C]Consumed item:65
+[C]Consumer SIGNALED empty:0
+[P]Producer WAITING semwait empty:0
 */
 
 #include <semaphore.h>
@@ -14,8 +58,8 @@ checked online and recommended to try sem_open and sem_close
 int buffer[BUFF_SIZE];
 int nextin = 0;
 int nextout = 0;
-void producer (void);
-void consumer (void);
+void * producer (void *);
+void * consumer (void *);
 sem_t empty, occupied;
 
 int main(void)
@@ -46,7 +90,7 @@ int main(void)
 
 }
 
-void producer (void)
+void * producer (void *)
 {
   int ch=0;
   int value = 0;
@@ -57,6 +101,7 @@ void producer (void)
 
     sem_getvalue(&empty, &value);
     printf("[P]Producer WAITING semwait empty:%d\n", value);
+    // IMP
     sem_wait(&empty);
     sem_getvalue(&empty, &value);
     printf("[P]INSIDE PRODUCER:%d\n", value);
@@ -67,6 +112,7 @@ void producer (void)
       nextin = 0;
     }
     printf("[P]Produced item:%d\n", ch);
+    //IMP
     sem_post(&occupied);
     sem_getvalue(&occupied, &value);
     printf("[P]Producer SIGNALED:%d occupied:%d\n", ch, value);
@@ -74,7 +120,7 @@ void producer (void)
   }
 }
 
-void consumer (void)
+void * consumer (void *)
 {
   int  item=0;
   int value=0;
@@ -84,6 +130,7 @@ void consumer (void)
     for (int k=0; k<0xFFFFFFFF; k++);
     sem_getvalue(&occupied, &value);
     printf("[C]Consumer WAITING occupied:%d\n", value);
+    //IMP
     sem_wait(&occupied);
     sem_getvalue(&occupied, &value);
     printf("[C]INSIDE CONSUMER:%d\n", value);
@@ -94,6 +141,7 @@ void consumer (void)
     }
     //sleep(1);
     printf("[C]Consumed item:%d\n", item);
+    //IMP
     sem_post(&empty);
     sem_getvalue(&empty, &value);
     printf("[C]Consumer SIGNALED empty:%d\n", value);

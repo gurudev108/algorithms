@@ -1,4 +1,6 @@
 /*
+NOT WORKING
+
 @TODO - Call pthread_cond_wait in while loop because threads can come out of it
 even without the condition being true.
 

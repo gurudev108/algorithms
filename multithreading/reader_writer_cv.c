@@ -1,4 +1,6 @@
 /*
+NOT WORKING
+
 Implemented using condition variables
 Any number of reader threads can read data
 When writer thread gets the lock, it should be exclusive
@@ -33,7 +35,7 @@ struct
   char buffer[MAX_DATA];
 } data;
 
-void reader (void)
+void * reader (void*)
 {
   printf("[READER]\n");
 
@@ -71,7 +73,7 @@ void writer (void)
 
 }
 
-void improved_writer (void)
+void *improved_writer (void*)
 {
   printf("[WRITER]\n");
   pthread_mutex_lock (&data.lock);

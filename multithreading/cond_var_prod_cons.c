@@ -1,5 +1,5 @@
 /*
-Question - Implement producer and consumer using condition variable and mutex
+Question - Implement producer and consumer using condition variable and mutex, with circular shared buffer.
 
 Output:
 Init Circular buffer
