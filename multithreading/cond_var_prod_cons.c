@@ -1,5 +1,23 @@
 /*
 Question - Implement producer and consumer using condition variable and mutex
+
+Output:
+Init Circular buffer
+Init mutex
+Creating threads
+Waiting for threads to finish
+Producer thread 0 started with nextin0 nextout0 empty10
+Produced 1 nextin 1, nextout 0 empty 9
+Consumer thread 1 started with nextin0 nextout0 empty10
+Consumed 1 nextin 1  nextout 1 empty 10
+Produced 2 nextin 2, nextout 1 empty 9
+Consumed 2 nextin 2  nextout 2 empty 10
+Produced 3 nextin 3, nextout 2 empty 9
+Produced 4 nextin 4, nextout 2 empty 8
+Consumed 3 nextin 4  nextout 3 empty 9
+Produced 5 nextin 5, nextout 3 empty 8
+Produced 6 nextin 6, nextout 3 empty 7
+Consumed 4 nextin 6  nextout 4 empty 8
 */
 
 #include <stdio.h>

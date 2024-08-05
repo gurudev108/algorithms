@@ -16,6 +16,25 @@ CAUTION while taking multiple locks 1 & 2 - Can cause deadlock
 Fix - if(!pthread_mutex_trylock(&lock2)) - always returns without blocking. If the mutex2
 is available it will lock the mutex and return 0. If mutex is not available, release lock 1 to prevent deadlock. 
 
+Output:
+
+ //without delay loop
+ == PTHREADS ==
+ Thread 0 has started
+ Job 0 has started - mutex locked
+ Thread 1 has started
+ Job 0 has finished - mutex unlocked
+ Job 1 has started - mutex locked
+ Job 1 has finished - mutex unlocked
+
+ //with the delay loop on thread 0 to let thread 1 take mutex
+ == PTHREADS ==
+ Thread 0 has started
+ Thread 1 has started
+ Job 1 has started - mutex locked
+ Job 1 has finished - mutex unlocked
+ Job 0 has started - mutex locked
+ Job 0 has finished - mutex unlocked
 */
 
 #include<pthread.h>
@@ -31,20 +50,23 @@ void* trythis(void* arg)
   int id = (int)(arg);
   
   printf("\n Thread %d has started\n", id);
+  /*
+  Delay loop for thread 0
   if (id ==0)
   {
     for (int j = 0; j < (0x0FFFFFFF); j++);
   }
+  */
 
     pthread_mutex_lock(&lock); 
   
     unsigned long i = 0; 
-    printf("\n Job %d has started\n", id); 
+    printf("\n Job %d has started - mutex locked\n", id); 
   
     for (int i = 0; i < (0xFFFFFFFF); i++) 
         ; 
   
-    printf("\n Job %d has finished\n", id); 
+    printf("\n Job %d has finished - mutex unlocked\n", id); 
   
     pthread_mutex_unlock(&lock); 
 
@@ -75,7 +97,7 @@ int main(void)
   {
     error = pthread_create(&(tid[i]), 
                              NULL, 
-                             &trythis, i); 
+                             &trythis, (void*)i);
     if (error != 0)
     {
       printf("\nThread can't be created :[%s]", 
@@ -84,6 +106,7 @@ int main(void)
     i++; 
   }
 
+  // make sure that this does not return until thread 0 and 1 are finished
   pthread_join(tid[0], NULL); 
   pthread_join(tid[1], NULL); 
   pthread_mutex_destroy(&lock);
