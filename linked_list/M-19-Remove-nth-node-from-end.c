@@ -1,62 +1,81 @@
 /*
-https://leetcode.com/problems/remove-nth-node-from-end-of-list/description/
+Leetcode 19 Remove Nth node from the end 
+
+Approach - Use 2 pointers - first and second.. move first n places away and then 
+move them together until first reaches end. 
+second's next pointer will be pointing to the node to be deleted. 
+
 */
+
 #include <stdio.h>
 #include <stdlib.h>
 
-struct Node
-{
-     int num;
-     struct Node *next;
+// Definition for singly-linked list.
+struct ListNode {
+    int val;
+    struct ListNode *next;
 };
 
-typedef struct Node Node;
+// Function to remove the nth node from the end of the list
+struct ListNode* removeNthFromEnd(struct ListNode* head, int n) {
+    struct ListNode dummy;
+    dummy.next = head;
+    struct ListNode *first = &dummy;
+    struct ListNode *second = &dummy;
 
-Node* removeNthFromEnd(Node* head, int n)
-{
-    Node* first = head
-    for(int i=0; i<n; i++)
-    {
-      
-    return head;
+    // Move first pointer so that the gap between first and second is n nodes apart
+    for (int i = 1; i <= n + 1; i++) {
+        first = first->next;
+    }
+
+    // Move both pointers until first reaches the end
+    while (first != NULL) {
+        first = first->next;
+        second = second->next;
+    }
+
+    // Second's next pointer will be pointing to the node to be deleted
+    struct ListNode *toDelete = second->next;
+    second->next = toDelete->next;
+    free(toDelete);
+
+    return dummy.next;
 }
 
-void print (Node* head)
-{
-  int count = 0;
-  printf("\nhead = 0x%p", head);
-  while(head)
-  {
-    printf("->%d", head->num); 
-    head = head->next;
-  }
+// Helper function to create a new node
+struct ListNode* newNode(int val) {
+    struct ListNode *node = (struct ListNode*)malloc(sizeof(struct ListNode));
+    node->val = val;
+    node->next = NULL;
+    return node;
 }
 
-void push (Node** head, int num)
-{
-  Node* item = (Node *)malloc(sizeof(Node));
-  // check item NULL error
-
-  item->num = num;
-  item->next = *head;
-
-  *head = item;
+// Helper function to print the list
+void printList(struct ListNode *head) {
+    while (head != NULL) {
+        printf("%d -> ", head->val);
+        head = head->next;
+    }
+    printf("NULL\n");
 }
 
+// Example usage
 int main() {
-  Node *head = NULL;
-  int insert = 0;
-  /* IMP - we pass &head because we want the function to update the new head - handler function will need double pointer */
-  push(&head, 5);
-  push(&head, 4);
-  push(&head, 3);
-  push(&head, 2);
-  push(&head, 1);
+    // Create a linked list: 1 -> 2 -> 3 -> 4 -> 5
+    struct ListNode *head = newNode(1);
+    head->next = newNode(2);
+    head->next->next = newNode(3);
+    head->next->next->next = newNode(4);
+    head->next->next->next->next = newNode(5);
 
-  print(head);
+    printf("Original list: ");
+    printList(head);
 
-  removeNthFromEnd(head, 2);
+    int n = 2;
+    head = removeNthFromEnd(head, n);
 
-  print(head); 
-  return 0;
-}  
+    printf("List after removing %dth node from the end: ", n);
+    printList(head);
+
+    return 0;
+}

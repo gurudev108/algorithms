@@ -50,6 +50,21 @@ bool check_loop(Node* head) {
   return false;
 }
 
+// Function to find the middle of the linked list
+struct ListNode* findMiddle(struct ListNode* head) {
+    struct ListNode *slow = head;
+    struct ListNode *fast = head;
+
+    // Move fast pointer two steps and slow pointer one step at a time
+    while (fast != NULL && fast->next != NULL) {
+        slow = slow->next;
+        fast = fast->next->next;
+    }
+
+    // slow pointer will be pointing to the middle node
+    return slow;
+}
+
 void reverse(Node **head)
 {
   Node *curr = *head;
