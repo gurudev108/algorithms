@@ -1,5 +1,8 @@
 /* 
+Theory - The Producer-Consumer problem is a classic synchronization issue in operating systems. It involves two types of processes: producers, which generate data, and consumers, which process that data. Both share a common buffer. The challenge is to ensure that the producer doesn’t add data to a full buffer and the consumer doesn’t remove data from an empty buffer while avoiding conflicts when accessing the buffer.
 
+We have a buffer of fixed size. A producer can produce an item and can place it in the buffer. A consumer can pick items and consume them. We need to ensure that when a producer is placing an item in the buffer, then at the same time consumer should not consume any item. In this problem, the buffer is the critical section. 
+To solve this problem, we need two counting semaphores - Full and Empty. “Full” keeps track of some items in the buffer at any given time and “Empty” keeps track of many unoccupied slots. 
 Produce consumer problem using semaphores
 
 /* Produce Consumer with POSIX semaphores 
