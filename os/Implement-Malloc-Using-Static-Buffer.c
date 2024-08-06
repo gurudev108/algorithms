@@ -1,13 +1,23 @@
 /*
 
-To implement malloc and free using static buffers (arrays), you can create a simple memory allocator that manages a fixed-size block of memory.
-The malloc function will allocate memory from the static buffer, and the free function will release the allocated memory. Here's a basic example:
+Implement malloc using arrays, free using LL
 
-In this example, initializeAllocator initializes the memory allocator, myMalloc allocates memory, and myFree frees allocated memory. 
+To implement malloc and free using static buffers (arrays), you can create a simple memory allocator 
+that manages a fixed-size block of memory.
+
+The malloc function will allocate memory from the static buffer, and the free function will release the 
+allocated memory. Here's a basic example:
+
+In this example, 
+initializeAllocator initializes the memory allocator, 
+myMalloc allocates memory, and 
+myFree frees allocated memory. 
+
 The printFreeBlocks function is provided for testing purposes to print the state of free blocks in the allocator.
 
-Note that this is a very basic and naive implementation for educational purposes. In a real-world scenario, a memory allocator needs to handle 
-concurrency, fragmentation, and other considerations, which are beyond the scope of this simple example. Additionally, this implementation assumes 
+Note that this is a very basic and naive implementation for educational purposes. 
+In a real-world scenario, a memory allocator needs to handle concurrency, fragmentation, and other considerations,
+which are beyond the scope of this simple example. Additionally, this implementation assumes 
 a single block of memory, and it does not handle memory leaks or other advanced features.
 
 Output:
@@ -41,11 +51,12 @@ malloc While loop index 0
 
 #include <stdio.h>
 #include <stddef.h>
+#include <stdint.h>
 
 #define MEMORY_SIZE 1024 // Adjust the size based on your needs
 
 // Static memory buffer
-static char memory[MEMORY_SIZE];
+static uint8_t memory[MEMORY_SIZE];
 
 // Node structure for maintaining free memory blocks
 struct FreeBlock {
@@ -141,7 +152,12 @@ int main() {
     // Initialize the memory allocator
     initializeAllocator();
 
-    printf("Free Blocks (Before Allocation):\n");
+    printf("\nsize of Node stucture for mantaining free memory %lu", sizeof(struct FreeBlock));
+    printf("\nSize of int:%zu", sizeof(int));
+    printf("\nSize of size_t:%zu", sizeof(size_t));
+    printf("\nSize of double:%zu", sizeof(double));
+
+    printf("\nFree Blocks (Before Allocation):");
     printFreeBlocks();
 
     // Allocate memory

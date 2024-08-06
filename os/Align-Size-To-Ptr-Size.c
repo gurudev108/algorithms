@@ -1,3 +1,13 @@
+/*
+Output:
+Enter the size of memory you want to allocate: 7
+Original Size: 7
+Aligned Size: 8
+                              
+Enter the size of memory you want to allocate: 17
+Original Size: 17
+Aligned Size: 24
+*/
 #include <stdio.h>
 
 size_t alignToPointerSize(size_t size) {
@@ -17,6 +27,7 @@ int main() {
     alignedSize = alignToPointerSize(originalSize);
 
     // Display the results
+    printf("\nSize of void* %lu\n", sizeof(void*));
     printf("Original Size: %zu\n", originalSize);
     printf("Aligned Size: %zu\n", alignedSize);
 

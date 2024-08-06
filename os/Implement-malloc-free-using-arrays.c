@@ -1,6 +1,8 @@
 /*
 Implement malloc free using static buffers (arrays)
 
+Note that we convert size lets say 100 bytes into blocks of uint8_t 
+
 Output:
 Allocated 100 bytes.
 Memory freed.
@@ -29,7 +31,10 @@ void* my_malloc(size_t size) {
         return NULL; // Invalid size
     }
 
+    // IMP - Align memory and return blocks. For 100, (100+8-1)/8 = 13 blocks using 104 
     size_t required_blocks = (size + sizeof(size_t) - 1) / sizeof(size_t);
+    //%zu used for size_t, portability
+    printf("\n Required blocks =%zu\n", required_blocks);
     size_t consecutive_free = 0;
     size_t start_index = 0;
 
@@ -55,11 +60,16 @@ void* my_malloc(size_t size) {
     return NULL; // Not enough memory
 }
 
-// Free a previously allocated block of memory
+/*
+Free a previously allocated block of memory
+Calculate start index from the ptr. 
+Calculate size and required blocks. 
+*/
 void my_free(void* ptr) {
     if (ptr == NULL) {
         return; // Null pointer
     }
+
 
     size_t start_index = ((uint8_t*)ptr - buffer) / sizeof(size_t);
     size_t size = *(size_t*)(buffer + start_index * sizeof(size_t));
