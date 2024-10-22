@@ -80,6 +80,24 @@ void reverse(Node **head)
   *head = prev;
 }
 
+#if 0 //Verified compared to above 
+void reverse_doubly(Node **head)
+{
+  Node *prev = NULL;
+  Node *curr = *head;
+  Node *next = NULL;
+  while(curr)
+  {
+    next = curr->next;
+    curr->next = prev;
+    curr->prev = next;
+    prev = curr;
+    curr = next;
+  }
+  *head = prev;
+}
+#endif
+
 void push (Node** head, int num)
 {
   Node* item = (Node *)malloc(sizeof(Node));
