@@ -2,6 +2,13 @@
 
 146. LRU Cache using doubly linked list and hashmap implemented as arrays.
 
+Approach
+
+The description of the put method states that we are storing key-value pairs. 
+This means the data structure is similar to a hash map, which also stores key-value pairs.
+
+To keep the order in which keys have been used, we can implement a queue
+
 1. Think about structures for a node and LRU cache and hashmap.
 2. Create LRU Cache
 3. Put some stuff in it
@@ -40,7 +47,7 @@ typedef struct {
     Node** hashmap; // Array of pointers to nodes for fast access
 } LRUCache;
 
-// Function to create a new node
+// Function to create a new node in Doubly Linked List
 Node* createNode(int key, int value) {
     Node* newNode = (Node*)malloc(sizeof(Node));
     newNode->key = key;
@@ -57,7 +64,8 @@ LRUCache* lRUCacheCreate(int capacity) {
     cache->size = 0;
     cache->head = NULL;
     cache->tail = NULL;
-    cache->hashmap = (Node**)malloc(sizeof(Node*) * 10000); // Assuming a constant hash table size
+    /* create memory to store 10k pointers to node of the doubly linked list for faster access */
+    cache->hashmap = (Node**)malloc(sizeof(Node*) * 10000);
 
     // Initialize the hashmap with NULL pointers
     for (int i = 0; i < 10000; i++) {
@@ -69,25 +77,32 @@ LRUCache* lRUCacheCreate(int capacity) {
 
 // Function to move a node to the front of the doubly linked list (marking it as most recently used)
 void moveToHead(LRUCache* cache, Node* node) {
+
+    /* Handle Node at front */
     if (node == cache->head) {
         return; // Node is already at the front
     }
 
+    /* pick out the node - adjust prev's next */
     if (node->prev != NULL) {
         node->prev->next = node->next;
     }
 
+    /* adjust next's prev */
     if (node->next != NULL) {
         node->next->prev = node->prev;
     }
 
+    /* Handle Node at tail */
     if (node == cache->tail) {
         cache->tail = node->prev;
     }
 
+    /* Insert node at head */
     node->next = cache->head;
     node->prev = NULL;
 
+    /* Handle prev of old head */
     if (cache->head != NULL) {
         cache->head->prev = node;
     }
