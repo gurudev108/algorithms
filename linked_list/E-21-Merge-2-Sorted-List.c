@@ -1,22 +1,36 @@
 /*
-21. Merge Two Sorted List
+Leetcode 21. Merge Two Sorted List
+
+Approach:
+1. Create a dummy node and assign current to point at it. Merged List will 
+continue after dummy, please return dummy.next
+2. Iterate through the list until one of them becomes empty - while (list1 && list2)
+3. Append remaining node
+
+List 1 = 1>3>5
+List 2 = 2>4>6
+Output:
+Merged List:
+1 -> 2 -> 3 -> 4 -> 5 -> 6 -> NULL
+Free Merged List:
+Free Done:
 */
 
 #include <stdio.h>
 #include <stdlib.h>
 
 // Definition for singly-linked list
-struct ListNode {
+typedef struct Node {
     int val;
-    struct ListNode* next;
-};
+    struct Node* next;
+} Node;
 
 // Function to merge two sorted linked lists
-struct ListNode* mergeTwoLists(struct ListNode* list1, struct ListNode* list2) {
+Node* mergeTwoLists(Node* list1, Node* list2) {
     /* ###IMP STEP#### */
     // Create a dummy node to simplify handling of the merged list
-    struct ListNode dummy;
-    struct ListNode* current = &dummy;
+    Node dummy;
+    Node* current = &dummy;
 
     // Iterate through the lists until one of them becomes empty
     while (list1 != NULL && list2 != NULL) {
@@ -46,8 +60,8 @@ struct ListNode* mergeTwoLists(struct ListNode* list1, struct ListNode* list2) {
 }
 
 // Function to print a linked list
-void printList(struct ListNode* head) {
-    struct ListNode* current = head;
+void printList(Node* head) {
+    Node* current = head;
     while (current != NULL) {
         printf("%d -> ", current->val);
         current = current->next;
@@ -56,18 +70,18 @@ void printList(struct ListNode* head) {
 }
 
 // Function to create a new node with a given value
-struct ListNode* newNode(int val) {
-    struct ListNode* node = (struct ListNode*)malloc(sizeof(struct ListNode));
+Node* newNode(int val) {
+    Node* node = (Node*)malloc(sizeof(Node));
     node->val = val;
     node->next = NULL;
     return node;
 }
 
 // Function to free the memory allocated for the linked list
-void freeList(struct ListNode* head) {
-    struct ListNode* current = head;
+void freeList(Node* head) {
+    Node* current = head;
     while (current != NULL) {
-        struct ListNode* next = current->next;
+        Node* next = current->next;
         free(current);
         current = next;
     }
@@ -75,26 +89,25 @@ void freeList(struct ListNode* head) {
 
 int main() {
     // Example linked lists: 1->3->5 and 2->4->6
-    struct ListNode* list1 = newNode(1);
+    Node* list1 = newNode(1);
     list1->next = newNode(3);
     list1->next->next = newNode(5);
 
-    struct ListNode* list2 = newNode(2);
+    Node* list2 = newNode(2);
     list2->next = newNode(4);
     list2->next->next = newNode(6);
 
     // Merge the two sorted linked lists
-    struct ListNode* mergedList = mergeTwoLists(list1, list2);
+    Node* mergedList = mergeTwoLists(list1, list2);
 
     // Print the merged list
     printf("Merged List:\n");
     printList(mergedList);
 
     // Free the memory allocated for the linked lists
-    freeList(list1);
-    freeList(list2);
+    printf("Free Merged List:\n");
     freeList(mergedList);
-
+ 
     return 0;
 }
 

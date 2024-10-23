@@ -51,9 +51,9 @@ bool check_loop(Node* head) {
 }
 
 // Function to find the middle of the linked list
-struct ListNode* findMiddle(struct ListNode* head) {
-    struct ListNode *slow = head;
-    struct ListNode *fast = head;
+Node* findMiddle(struct Node* head) {
+    Node *slow = head;
+    Node *fast = head;
 
     // Move fast pointer two steps and slow pointer one step at a time
     while (fast != NULL && fast->next != NULL) {
@@ -80,7 +80,6 @@ void reverse(Node **head)
   *head = prev;
 }
 
-#if 0 //Verified compared to above 
 void reverse_doubly(Node **head)
 {
   Node *prev = NULL;
@@ -90,13 +89,13 @@ void reverse_doubly(Node **head)
   {
     next = curr->next;
     curr->next = prev;
-    curr->prev = next;
+    //compile error workaround but needed for doubly linked list (not defined here)
+    //curr->prev = next; 
     prev = curr;
     curr = next;
   }
   *head = prev;
 }
-#endif
 
 void push (Node** head, int num)
 {
