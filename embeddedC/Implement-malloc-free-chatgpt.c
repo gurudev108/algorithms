@@ -93,7 +93,7 @@ void* mymalloc(size_t size) {
     return NULL;
 }
 
-// Free memory
+// Free memory, add new block in the beginning
 void myfree(void* ptr) {
     if (ptr == NULL) {
         return;

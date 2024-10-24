@@ -1,3 +1,12 @@
+/*
+DOES NOT HANDLE OVERLAPPING MEMORY REGIONS - Use memmove instead.
+The memcpy function does not handle overlapping memory regions correctly. If the source and destination regions overlap, 
+using memcpy can lead to undefined behavior because it does not account for the order of copying. 
+Data can be overwritten before it has been copied, resulting in corrupted output.
+For scenarios where the source and destination memory regions may overlap, you should use memmove. 
+The memmove function is designed to handle such cases safely. It checks the relative positions of the source and 
+destination pointers and chooses whether to copy the data forwards or backwards to avoid overwriting the source data.
+*/
 #include <stdio.h>
 #include <string.h>
 
