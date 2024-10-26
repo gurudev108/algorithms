@@ -1,4 +1,48 @@
-// C code for linked list merged sort
+/* 
+C code for linked list merged sort
+
+Approach: Divide and Conquer approach - Recursion
+Base case
+Split the list into 2 halves 
+Merge Sort both the halves (Recursion)
+Merge the sorted list
+Explanation of the Code
+ListNode Structure: Defines the structure of a node in the linked list.
+splitList: This function splits the linked list into two halves using the slow and fast pointer approach.
+mergeLists: This function merges two sorted linked lists.
+mergeSort: This is the main function that implements merge sort on the linked list.
+printList: Utility function to print the linked list.
+newNode: Utility function to create a new linked list node.
+main: Creates a sample linked list, sorts it, and prints both the original and sorted linked list.
+
+Output: 
+Linked List before sorting: 9 3 8 4 2 0 8 3 9 7 
+SortedMerge first:9 second:3
+SortedMerge first:3 second:8
+SortedMerge first:9 second:8
+SortedMerge first:4 second:2
+SortedMerge first:3 second:2
+SortedMerge first:3 second:4
+SortedMerge first:8 second:4
+SortedMerge first:0 second:8
+SortedMerge first:0 second:3
+SortedMerge first:8 second:3
+SortedMerge first:9 second:7
+SortedMerge first:0 second:7
+SortedMerge first:3 second:7
+SortedMerge first:8 second:7
+SortedMerge first:8 second:9
+SortedMerge first:2 second:0
+SortedMerge first:2 second:3
+SortedMerge first:3 second:3
+SortedMerge first:4 second:3
+SortedMerge first:4 second:7
+SortedMerge first:8 second:7
+SortedMerge first:8 second:8
+SortedMerge first:9 second:8
+SortedMerge first:9 second:9
+Sorted Linked List is: 0 2 3 3 4 7 8 8 9 9 
+*/
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -125,7 +169,7 @@ int main()
 Created lists shall be a: 2->3->20->5->10->15 */
   for (int i=0; i<10; i++)
   {
-    push(&a, i);
+    push(&a, rand()%10);
   }
 
   printf("\nLinked List before sorting: ");
@@ -140,3 +184,29 @@ Created lists shall be a: 2->3->20->5->10->15 */
   return 0;
 }
 
+/*
+
+Approaches to Solve the Problem
+Merge Sort:
+Overview: Merge sort is a divide-and-conquer algorithm that recursively splits the list into halves, sorts each half, and then merges them back together.
+Complexity: It runs in O(nlogn)
+O(nlogn) time and can be implemented in constant space (if we consider the space for the recursive stack as not being additional, which is debatable).
+Implementation: It is well-suited for linked lists because merging two linked lists can be done in linear time without extra space.
+Quick Sort:
+Overview: Quick sort selects a pivot element, partitions the linked list around the pivot, and then recursively sorts the partitions.
+Complexity: While it can average O(nlogn)
+O(nlogn), its worst-case time complexity is O(n2) if the pivot is poorly chosen.
+Space Complexity: It typically requires O(n) space for the recursive calls, making it unsuitable for this problem.
+Heap Sort:
+Overview: Heap sort involves building a heap from the linked list and then repeatedly extracting the maximum element.
+Complexity: It has a time complexity of O(nlogn), but it requires O(n) space for the heap.
+Space Complexity: This approach doesn't meet the requirement of constant space.
+Insertion Sort:
+Overview: While insertion sort is O(n2) in the average and worst cases, it can be efficient for small or partially sorted lists.
+Complexity: It doesn’t meet the O(nlogn) requirement, so it's not suitable here.
+Best Approach
+Merge Sort is the best approach for this problem because:
+It can be implemented in O(nlogn) time.
+It can be adapted to work with linked lists efficiently without needing additional space for data structures, aside from a few pointers.
+
+*/
