@@ -1,7 +1,10 @@
 /*
 
+Same as DCP#936
+
 Leetcode E 938 Range sum of BST
-Given the root node of a binary search tree and two integers low and high, return the sum of values of all nodes with a value in the inclusive range [low, high].
+Given the root node of a binary search tree and two integers low and high, 
+return the sum of values of all nodes with a value in the inclusive range [low, high].
 
 Approach:
 1. Recursive
@@ -97,19 +100,20 @@ int rangeSumBSTRecursive(struct TreeNode* root, int low, int high) {
 
 int main() {
     // Create a sample BST:
-    //        10
+    //        5
     //       /  \
-    //      5   15
-    //     / \    \
-    //    3   7   18
-    struct TreeNode *root = createTreeNode(10);
-    root->left = createTreeNode(5);
-    root->right = createTreeNode(15);
-    root->left->left = createTreeNode(3);
-    root->left->right = createTreeNode(7);
-    root->right->right = createTreeNode(18);
+    //      3   8
+    //     / \ / \
+    //    2  4 6  10
+    struct TreeNode *root = createTreeNode(5);
+    root->left = createTreeNode(3);
+    root->right = createTreeNode(8);
+    root->left->left = createTreeNode(2);
+    root->left->right = createTreeNode(4);
+    root->right->left = createTreeNode(6);
+    root->right->right = createTreeNode(10);
 
-    int low = 7, high = 15;
+    int low = 4, high = 9;
     
     // Compute and print the range sum.
     int result_recursive = rangeSumBSTRecursive(root, low, high);
